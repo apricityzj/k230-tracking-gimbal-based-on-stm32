@@ -1,6 +1,6 @@
 Dependencies for Project 'stm32f103c8', Target 'stm32f103': (DO NOT MODIFY !)
 CompilerVersion: 5060528::V5.06 update 5 (build 528)::.\ARMCC
-F (..\app\main.c)(0x69AFE29F)(--gnu -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\firmware\cmsis\core -I ..\firmware\cmsis\device -I ..\firmware\driver\inc -I ..\driver-ID:\Keil_v5\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="537" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+F (..\app\main.c)(0x69BE67F9)(--gnu -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\firmware\cmsis\core -I ..\firmware\cmsis\device -I ..\firmware\driver\inc -I ..\driver-ID:\Keil_v5\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="537" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
 I (..\firmware\cmsis\device\stm32f10x.h)(0x61605444)
 I (..\firmware\cmsis\core\core_cm3.h)(0x61605444)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x588BD7A4)
@@ -29,10 +29,10 @@ I (..\firmware\driver\inc\stm32f10x_tim.h)(0x61605445)
 I (..\firmware\driver\inc\stm32f10x_usart.h)(0x61605445)
 I (..\firmware\driver\inc\stm32f10x_wwdg.h)(0x61605445)
 I (..\firmware\driver\inc\misc.h)(0x61605445)
-I (..\driver\gimbal.h)(0x69AFDF88)
-I (..\driver\uart_com.h)(0x69AFDF70)
+I (..\driver\servo.h)(0x69AFB67F)
+I (..\driver\uart_com.h)(0x69BE04E0)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x588BD7A4)
-F (..\driver\gimbal.c)(0x69AFDFD3)(--gnu -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\firmware\cmsis\core -I ..\firmware\cmsis\device -I ..\firmware\driver\inc -I ..\driver-ID:\Keil_v5\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="537" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\gimbal.o --omf_browse .\objects\gimbal.crf --depend .\objects\gimbal.d)
+F (..\driver\gimbal.c)(0x69BD603E)(--gnu -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\firmware\cmsis\core -I ..\firmware\cmsis\device -I ..\firmware\driver\inc -I ..\driver-ID:\Keil_v5\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="537" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\gimbal.o --omf_browse .\objects\gimbal.crf --depend .\objects\gimbal.d)
 I (..\driver\gimbal.h)(0x69AFDF88)
 I (..\firmware\cmsis\device\stm32f10x.h)(0x61605444)
 I (..\firmware\cmsis\core\core_cm3.h)(0x61605444)
@@ -64,7 +64,7 @@ I (..\firmware\driver\inc\stm32f10x_wwdg.h)(0x61605445)
 I (..\firmware\driver\inc\misc.h)(0x61605445)
 I (..\driver\joypad.h)(0x69AFB668)
 I (..\driver\servo.h)(0x69AFB67F)
-F (..\driver\joypad.c)(0x69AFB676)(--gnu -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\firmware\cmsis\core -I ..\firmware\cmsis\device -I ..\firmware\driver\inc -I ..\driver-ID:\Keil_v5\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="537" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\joypad.o --omf_browse .\objects\joypad.crf --depend .\objects\joypad.d)
+F (..\driver\joypad.c)(0x69BD5FAD)(--gnu -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\firmware\cmsis\core -I ..\firmware\cmsis\device -I ..\firmware\driver\inc -I ..\driver-ID:\Keil_v5\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="537" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\joypad.o --omf_browse .\objects\joypad.crf --depend .\objects\joypad.d)
 I (..\driver\joypad.h)(0x69AFB668)
 I (..\firmware\cmsis\device\stm32f10x.h)(0x61605444)
 I (..\firmware\cmsis\core\core_cm3.h)(0x61605444)
@@ -94,7 +94,7 @@ I (..\firmware\driver\inc\stm32f10x_tim.h)(0x61605445)
 I (..\firmware\driver\inc\stm32f10x_usart.h)(0x61605445)
 I (..\firmware\driver\inc\stm32f10x_wwdg.h)(0x61605445)
 I (..\firmware\driver\inc\misc.h)(0x61605445)
-F (..\driver\servo.c)(0x69AFB681)(--gnu -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\firmware\cmsis\core -I ..\firmware\cmsis\device -I ..\firmware\driver\inc -I ..\driver-ID:\Keil_v5\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="537" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\servo.o --omf_browse .\objects\servo.crf --depend .\objects\servo.d)
+F (..\driver\servo.c)(0x69BD5FC3)(--gnu -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\firmware\cmsis\core -I ..\firmware\cmsis\device -I ..\firmware\driver\inc -I ..\driver-ID:\Keil_v5\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="537" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\servo.o --omf_browse .\objects\servo.crf --depend .\objects\servo.d)
 I (..\driver\servo.h)(0x69AFB67F)
 I (..\firmware\cmsis\device\stm32f10x.h)(0x61605444)
 I (..\firmware\cmsis\core\core_cm3.h)(0x61605444)
@@ -124,8 +124,8 @@ I (..\firmware\driver\inc\stm32f10x_tim.h)(0x61605445)
 I (..\firmware\driver\inc\stm32f10x_usart.h)(0x61605445)
 I (..\firmware\driver\inc\stm32f10x_wwdg.h)(0x61605445)
 I (..\firmware\driver\inc\misc.h)(0x61605445)
-F (..\driver\uart_com.c)(0x69AFDF79)(--gnu -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\firmware\cmsis\core -I ..\firmware\cmsis\device -I ..\firmware\driver\inc -I ..\driver-ID:\Keil_v5\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="537" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\uart_com.o --omf_browse .\objects\uart_com.crf --depend .\objects\uart_com.d)
-I (..\driver\uart_com.h)(0x69AFDF70)
+F (..\driver\uart_com.c)(0x69BE5CEA)(--gnu -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\firmware\cmsis\core -I ..\firmware\cmsis\device -I ..\firmware\driver\inc -I ..\driver-ID:\Keil_v5\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="537" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\uart_com.o --omf_browse .\objects\uart_com.crf --depend .\objects\uart_com.d)
+I (..\driver\uart_com.h)(0x69BE04E0)
 I (..\firmware\cmsis\device\stm32f10x.h)(0x61605444)
 I (..\firmware\cmsis\core\core_cm3.h)(0x61605444)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x588BD7A4)
@@ -155,6 +155,7 @@ I (..\firmware\driver\inc\stm32f10x_usart.h)(0x61605445)
 I (..\firmware\driver\inc\stm32f10x_wwdg.h)(0x61605445)
 I (..\firmware\driver\inc\misc.h)(0x61605445)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x588BD7A4)
+I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x588BD7A4)
 F (..\firmware\driver\src\misc.c)(0x61605445)(--gnu -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\firmware\cmsis\core -I ..\firmware\cmsis\device -I ..\firmware\driver\inc -I ..\driver-ID:\Keil_v5\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="537" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\misc.o --omf_browse .\objects\misc.crf --depend .\objects\misc.d)
 I (..\firmware\driver\inc\misc.h)(0x61605445)
 I (..\firmware\cmsis\device\stm32f10x.h)(0x61605444)

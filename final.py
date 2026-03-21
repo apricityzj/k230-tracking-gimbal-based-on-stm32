@@ -250,10 +250,11 @@ if __name__=="__main__":
 
                 # 按照协议打包并发送：例如 @X150Y-20#
                 send_str = f"X{offset_x}Y{offset_y}\n"
+                #send_str = f"${offset_x}{offset_y}$\r\n"
                 uart.write(send_str.encode('utf-8'))
             else:
                 # 画面里没手时，发送全 0 让云台停止
-                uart.write(b"X0Y0\n")
+                uart.write(b"X0Y0\r\n")
 
 
             hr.draw_result(pl,hand_det_res,hand_rec_res)    # 绘制推理结果

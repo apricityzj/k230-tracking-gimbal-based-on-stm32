@@ -1,4 +1,4 @@
-﻿#include "stm32f10x.h"
+#include "tracking_ctrl.h"
 #include "servo.h"
 #include "uart_com.h"
 
@@ -31,18 +31,15 @@ static float pwm_pitch = PWM_CENTER;
 // 滤波后的俯仰偏差，抑制上下抖动
 static float pitch_filtered_offset = 0.0f;
 
-// 粗略毫秒延时：忙等待实现，受主频与编译优化等级影响
-void Delay_ms(uint32_t ms)
+static void Delay_ms(uint32_t ms)
 {
     volatile uint32_t i, j;
     for (i = 0; i < ms; i++)
         for (j = 0; j < 8000; j++);
 }
 
-// 将当前 PWM 做安全限幅并写入定时器比较寄存器
 static void ClampAndApplyPwm(void)
 {
-    // 脉宽限幅，防止超出舵机安全范围
     if (pwm_yaw > PWM_MAX) pwm_yaw = PWM_MAX;
     if (pwm_yaw < PWM_MIN) pwm_yaw = PWM_MIN;
     if (pwm_pitch > PWM_MAX) pwm_pitch = PWM_MAX;
@@ -52,13 +49,11 @@ static void ClampAndApplyPwm(void)
     TIM_SetCompare2(TIM3, (uint16_t)pwm_pitch);
 }
 
-// 计算 int16 的绝对值
 static int16_t AbsInt16(int16_t value)
 {
     return (value < 0) ? (int16_t)(-value) : value;
 }
 
-// 将像素偏差映射为本次 PWM 步长（含死区与比例限幅）
 static float ComputeStepUs(int16_t offset, float max_step_us)
 {
     int16_t abs_offset = AbsInt16(offset);
@@ -66,11 +61,9 @@ static float ComputeStepUs(int16_t offset, float max_step_us)
     float step;
 
     if (abs_offset <= DEADZONE_PIXELS) {
-        // 死区内不动作，避免目标附近来回反向
         return 0.0f;
     }
 
-    // 死区外按误差比例增大步长，并做上限限制
     ratio = (float)(abs_offset - DEADZONE_PIXELS) / (float)(OFFSET_FULL_SCALE - DEADZONE_PIXELS);
     if (ratio > 1.0f) {
         ratio = 1.0f;
@@ -80,41 +73,4 @@ static float ComputeStepUs(int16_t offset, float max_step_us)
     return (offset < 0) ? -step : step;
 }
 
-// 主流程：初始化外设后循环接收偏差并驱动双轴舵机
-int main(void)
-{
-    int16_t offset_x = 0;
-    int16_t offset_y = 0;
-    int16_t ctrl_x = 0;
-    int16_t ctrl_y = 0;
-    float step_x = 0.0f;
-    float step_y = 0.0f;
 
-    Servo_Init();
-    ClampAndApplyPwm();
-    UART1_Init(UART_BAUDRATE);
-
-    while (1)
-    {
-        if (UART1_GetTrackingOffset(&offset_x, &offset_y)) {
-            // 根据配置决定是否交换 X/Y 轴
-            ctrl_x = SWAP_XY ? offset_y : offset_x;
-            ctrl_y = SWAP_XY ? offset_x : offset_y;
-
-            // 仅对俯仰轴做滤波，重点抑制上下摆头
-            pitch_filtered_offset += ((float)ctrl_y - pitch_filtered_offset) * PITCH_FILTER_ALPHA;
-
-            step_x = ComputeStepUs(ctrl_x, MAX_STEP_YAW_US);
-            step_y = ComputeStepUs((int16_t)pitch_filtered_offset, MAX_STEP_PITCH_US);
-
-            if (step_x != 0.0f || step_y != 0.0f) {
-                // 方向修正后累加到 PWM，并统一限幅输出
-                pwm_yaw += (float)YAW_DIR * step_x;
-                pwm_pitch += (float)PITCH_DIR * step_y;
-                ClampAndApplyPwm();
-            }
-        }
-
-        Delay_ms(LOOP_MS);
-    }
-}

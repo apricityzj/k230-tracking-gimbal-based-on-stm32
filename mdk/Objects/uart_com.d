@@ -30,3 +30,4 @@
 .\objects\uart_com.o: ..\firmware\driver\inc\stm32f10x_wwdg.h
 .\objects\uart_com.o: ..\firmware\driver\inc\misc.h
 .\objects\uart_com.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\uart_com.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

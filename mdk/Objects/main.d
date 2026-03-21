@@ -28,6 +28,6 @@
 .\objects\main.o: ..\firmware\driver\inc\stm32f10x_usart.h
 .\objects\main.o: ..\firmware\driver\inc\stm32f10x_wwdg.h
 .\objects\main.o: ..\firmware\driver\inc\misc.h
-.\objects\main.o: ..\driver\gimbal.h
+.\objects\main.o: ..\driver\servo.h
 .\objects\main.o: ..\driver\uart_com.h
 .\objects\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
