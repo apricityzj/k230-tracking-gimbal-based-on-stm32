@@ -190,7 +190,7 @@
             <hadIRAM2>0</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>8</StupSel>
-            <useUlib>1</useUlib>
+            <useUlib>0</useUlib>
             <EndSel>0</EndSel>
             <uLtcg>0</uLtcg>
             <nSecure>0</nSecure>
@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER, STM32F10X_MD</Define>
               <Undefine></Undefine>
-              <IncludePath>..\firmware\cmsis\core;..\firmware\cmsis\device;..\firmware\driver\inc;..\driver</IncludePath>
+              <IncludePath>..\firmware\cmsis\core;..\firmware\cmsis\device;..\firmware\driver\inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -395,14 +395,9 @@
           <GroupName>driver</GroupName>
           <Files>
             <File>
-              <FileName>gimbal.c</FileName>
+              <FileName>uart.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\driver\gimbal.c</FilePath>
-            </File>
-            <File>
-              <FileName>joypad.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\driver\joypad.c</FilePath>
+              <FilePath>..\driver\uart.c</FilePath>
             </File>
             <File>
               <FileName>servo.c</FileName>
@@ -410,9 +405,9 @@
               <FilePath>..\driver\servo.c</FilePath>
             </File>
             <File>
-              <FileName>uart_com.c</FileName>
+              <FileName>pid.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\driver\uart_com.c</FilePath>
+              <FilePath>..\driver\pid.c</FilePath>
             </File>
           </Files>
         </Group>

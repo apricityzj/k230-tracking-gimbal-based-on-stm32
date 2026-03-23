@@ -22,7 +22,6 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
-#include "uart_com.h"
 
 /** @addtogroup STM32F10x_StdPeriph_Template
   * @{
@@ -151,11 +150,6 @@ void SysTick_Handler(void)
 /*void PPP_IRQHandler(void)
 {
 }*/
-
-void USART1_IRQHandler(void)
-{
-  UART1_IRQHandler_User();
-}
 
 /**
   * @}

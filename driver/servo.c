@@ -1,71 +1,73 @@
 #include "servo.h"
 
-void Servo_Init(void)
+uint16_t SERVO_ClampPulseUs(int32_t pulse_us)
 {
-    GPIO_InitTypeDef GPIO_InitStructure;
-    TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
-    TIM_OCInitTypeDef TIM_OCInitStructure;
+    if (pulse_us < SERVO_PULSE_MIN_US) {
+        return SERVO_PULSE_MIN_US;
+    }
+    if (pulse_us > SERVO_PULSE_MAX_US) {
+        return SERVO_PULSE_MAX_US;
+    }
+    return (uint16_t)pulse_us;
+}
 
-    // 使能时钟
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
+void SERVO_Init(void)
+{
+    GPIO_InitTypeDef gpio_init;
+    TIM_TimeBaseInitTypeDef tim_base_init;
+    TIM_OCInitTypeDef tim_oc_init;
+
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_AFIO, ENABLE);
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
 
-    // PA6（TIM3_CH1）和 PA7（TIM3_CH2）配置为复用推挽输出
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6 | GPIO_Pin_7;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init(GPIOA, &GPIO_InitStructure);
+    gpio_init.GPIO_Pin = GPIO_Pin_6 | GPIO_Pin_7;
+    gpio_init.GPIO_Mode = GPIO_Mode_AF_PP;
+    gpio_init.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_Init(GPIOA, &gpio_init);
 
-    // 50Hz PWM 的时基配置
-    // 假设系统核心时钟为 72MHz
-    // 72MHz / 72 = 1MHz 计数频率（1 tick = 1us）
-    // 20000 tick = 20ms = 50Hz
-    TIM_TimeBaseStructure.TIM_Period = 20000 - 1; 
-    TIM_TimeBaseStructure.TIM_Prescaler = 72 - 1; 
-    TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;
-    TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
-    TIM_TimeBaseInit(TIM3, &TIM_TimeBaseStructure);
+    tim_base_init.TIM_Period = 20000U - 1U;
+    tim_base_init.TIM_Prescaler = 72U - 1U;
+    tim_base_init.TIM_ClockDivision = TIM_CKD_DIV1;
+    tim_base_init.TIM_CounterMode = TIM_CounterMode_Up;
+    TIM_TimeBaseInit(TIM3, &tim_base_init);
 
-    // 输出比较（PWM）配置
-    // 脉宽 = 1500us -> 1.5ms（对应 90 度中心位）
-    TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1;
-    TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
-    TIM_OCInitStructure.TIM_Pulse = 1500;
-    TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High;
+    tim_oc_init.TIM_OCMode = TIM_OCMode_PWM1;
+    tim_oc_init.TIM_OutputState = TIM_OutputState_Enable;
+    tim_oc_init.TIM_Pulse = SERVO_PULSE_MID_US;
+    tim_oc_init.TIM_OCPolarity = TIM_OCPolarity_High;
 
-    // CH1 配置（Yaw，PA6）
-    TIM_OC1Init(TIM3, &TIM_OCInitStructure);
+    TIM_OC1Init(TIM3, &tim_oc_init);
     TIM_OC1PreloadConfig(TIM3, TIM_OCPreload_Enable);
 
-    // CH2 配置（Pitch，PA7）
-    TIM_OCInitStructure.TIM_Pulse = 1500;
-    TIM_OC2Init(TIM3, &TIM_OCInitStructure);
+    TIM_OC2Init(TIM3, &tim_oc_init);
     TIM_OC2PreloadConfig(TIM3, TIM_OCPreload_Enable);
 
-    // 使能定时器
+    TIM_ARRPreloadConfig(TIM3, ENABLE);
     TIM_Cmd(TIM3, ENABLE);
 }
 
-// 将 0 - 180 度转换为 Yaw 脉宽
-void Servo_SetAngle_Yaw(float angle)
+void SERVO_SetPulseUs(uint8_t channel, uint16_t pulse_us)
 {
-    // 限制角度范围
-    if (angle < 0.0f) angle = 0.0f;
-    if (angle > 180.0f) angle = 180.0f;
-    
-    // 将 0-180 映射到 500-2500 脉宽（0.5ms 到 2.5ms）
-    uint16_t pwm_val = (uint16_t)(500 + (angle / 180.0f) * 2000);
-    TIM_SetCompare1(TIM3, pwm_val);
+    uint16_t pulse = SERVO_ClampPulseUs((int32_t)pulse_us);
+
+    if (channel == SERVO_CHANNEL_X) {
+        TIM_SetCompare1(TIM3, pulse);
+    } else if (channel == SERVO_CHANNEL_Y) {
+        TIM_SetCompare2(TIM3, pulse);
+    }
 }
 
-// 将 0 - 180 度转换为 Pitch 脉宽
-void Servo_SetAngle_Pitch(float angle)
+void SERVO_SetAngle(uint8_t channel, float angle_deg)
 {
-    // 限制角度范围
-    if (angle < 0.0f) angle = 0.0f;
-    if (angle > 180.0f) angle = 180.0f;
-    
-    // 将 0-180 映射到 500-2500 脉宽（0.5ms 到 2.5ms）
-    uint16_t pwm_val = (uint16_t)(500 + (angle / 180.0f) * 2000);
-    TIM_SetCompare2(TIM3, pwm_val);
+    float pulse;
+
+    if (angle_deg < 0.0f) {
+        angle_deg = 0.0f;
+    }
+    if (angle_deg > 180.0f) {
+        angle_deg = 180.0f;
+    }
+
+    pulse = 500.0f + (angle_deg / 180.0f) * 2000.0f;
+    SERVO_SetPulseUs(channel, (uint16_t)(pulse + 0.5f));
 }

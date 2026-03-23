@@ -9,10 +9,25 @@ import ulab.numpy as np
 import image
 import aicube
 
-from machine import UART
+from machine import UART, FPIOA
 import time
 
 
+def send_hex_packet(uart_obj, x, y):
+    # 将输入的数字转为整型，并利用 & 0xFFFF 获取它的 16 位补码（完美处理负数）
+    x_hex = int(x) & 0xFFFF
+    y_hex = int(y) & 0xFFFF
+
+    # 按照 [0x2C, X高, X低, Y高, Y低, 0x5B] 格式打包
+    packet = bytearray([
+        0x2C,
+        (x_hex >> 8) & 0xFF,
+        x_hex & 0xFF,
+        (y_hex >> 8) & 0xFF,
+        y_hex & 0xFF,
+        0x5B
+    ])
+    uart_obj.write(packet)
 
 # 自定义手掌检测任务类
 class HandDetApp(AIBase):
@@ -197,6 +212,8 @@ class HandRecognition:
                 pl.osd_img.draw_string_advanced( x_det, y_det-50, 32,hand_rec_res[k], color=(255,0, 255, 0))
 
 
+
+
 if __name__=="__main__":
     # 添加显示模式，默认hdmi，可选hdmi/lcd/lt9611/st7701/hx8399/nt35516,其中hdmi默认置为lt9611，分辨率1920*1080；lcd默认置为st7701，分辨率800*480
     display_mode="hdmi"
@@ -215,9 +232,13 @@ if __name__=="__main__":
     labels=["gun","other","yeah","five"]
     anchors = [26,27, 53,52, 75,71, 80,99, 106,82, 99,134, 140,113, 161,172, 245,276]
 
+    fpioa = FPIOA()
+    fpioa.set_function(11, FPIOA.UART2_TXD)
+    fpioa.set_function(12, FPIOA.UART2_RXD)
+    #uart = UART(2, baudrate=115200)
+    uart = UART(2, baudrate=921600)
 
-
-    uart = UART(2, baudrate=115200, tx=11, rx=12) # 根据实际情况配置 tx, rx 甚至串口编号
+    #uart = UART(2, baudrate=115200, tx=11, rx=12) # 根据实际情况配置 tx, rx 甚至串口编号
     print("串口初始化成功，准备发送数据...")
 
     # 初始化PipeLine，只关注传给AI的图像分辨率，显示的分辨率
@@ -228,6 +249,8 @@ if __name__=="__main__":
 
     screen_center_x = rgb888p_size[0] / 2.0
     screen_center_y = rgb888p_size[1] / 2.0
+
+
 
     while True:
         with ScopedTiming("total",1):
@@ -251,10 +274,14 @@ if __name__=="__main__":
                 # 按照协议打包并发送：例如 @X150Y-20#
                 send_str = f"X{offset_x}Y{offset_y}\n"
                 #send_str = f"${offset_x}{offset_y}$\r\n"
-                uart.write(send_str.encode('utf-8'))
+                #send_str = f"0x2C,7,{offset_x},{offset_y},3,4,0x5B"
+                #uart.write(send_str.encode('utf-8'))
+                send_hex_packet(uart, offset_x, offset_y)
+
             else:
                 # 画面里没手时，发送全 0 让云台停止
-                uart.write(b"X0Y0\r\n")
+                #uart.write(b"X0Y0\r\n")
+                send_hex_packet(uart, 0, 0)
 
 
             hr.draw_result(pl,hand_det_res,hand_rec_res)    # 绘制推理结果
