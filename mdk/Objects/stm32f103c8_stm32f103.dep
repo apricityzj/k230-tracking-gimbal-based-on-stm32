@@ -1,6 +1,6 @@
 Dependencies for Project 'stm32f103c8', Target 'stm32f103': (DO NOT MODIFY !)
 CompilerVersion: 5060528::V5.06 update 5 (build 528)::.\ARMCC
-F (..\app\main.c)(0x69C0B05B)(--gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\firmware\cmsis\core -I ..\firmware\cmsis\device -I ..\firmware\driver\inc-ID:\Keil_v5\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="537" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+F (..\app\main.c)(0x69F8D528)(--gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\firmware\cmsis\core -I ..\firmware\cmsis\device -I ..\firmware\driver\inc-ID:\Keil_v5\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="537" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
 I (..\firmware\cmsis\device\stm32f10x.h)(0x61605444)
 I (..\firmware\cmsis\core\core_cm3.h)(0x61605444)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x588BD7A4)

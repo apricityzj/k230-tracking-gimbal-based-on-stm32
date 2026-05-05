@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#111111"/>
+    </marker>
+    <style>
+      .bg { fill: #ffffff; }
+      .grid { stroke: #e9e7df; stroke-width: 1; }
+      .box { fill: #ffffff; stroke: #222222; stroke-width: 3; }
+      .wire { stroke: #111111; stroke-width: 4; fill: none; marker-end: url(#arrow); }
+      .text { font-family: "Microsoft YaHei", "PingFang SC", sans-serif; fill: #111111; }
+      .title { font-size: 34px; font-weight: 700; }
+      .label { font-size: 24px; font-weight: 500; }
+      .small { font-size: 20px; font-weight: 500; }
+    </style>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1200" height="900"/>
+
+  <g>
+    <line class="grid" x1="0" y1="0" x2="0" y2="900"/>
+    <line class="grid" x1="40" y1="0" x2="40" y2="900"/>
+    <line class="grid" x1="80" y1="0" x2="80" y2="900"/>
+    <line class="grid" x1="120" y1="0" x2="120" y2="900"/>
+    <line class="grid" x1="160" y1="0" x2="160" y2="900"/>
+    <line class="grid" x1="200" y1="0" x2="200" y2="900"/>
+    <line class="grid" x1="240" y1="0" x2="240" y2="900"/>
+    <line class="grid" x1="280" y1="0" x2="280" y2="900"/>
+    <line class="grid" x1="320" y1="0" x2="320" y2="900"/>
+    <line class="grid" x1="360" y1="0" x2="360" y2="900"/>
+    <line class="grid" x1="400" y1="0" x2="400" y2="900"/>
+    <line class="grid" x1="440" y1="0" x2="440" y2="900"/>
+    <line class="grid" x1="480" y1="0" x2="480" y2="900"/>
+    <line class="grid" x1="520" y1="0" x2="520" y2="900"/>
+    <line class="grid" x1="560" y1="0" x2="560" y2="900"/>
+    <line class="grid" x1="600" y1="0" x2="600" y2="900"/>
+    <line class="grid" x1="640" y1="0" x2="640" y2="900"/>
+    <line class="grid" x1="680" y1="0" x2="680" y2="900"/>
+    <line class="grid" x1="720" y1="0" x2="720" y2="900"/>
+    <line class="grid" x1="760" y1="0" x2="760" y2="900"/>
+    <line class="grid" x1="800" y1="0" x2="800" y2="900"/>
+    <line class="grid" x1="840" y1="0" x2="840" y2="900"/>
+    <line class="grid" x1="880" y1="0" x2="880" y2="900"/>
+    <line class="grid" x1="920" y1="0" x2="920" y2="900"/>
+    <line class="grid" x1="960" y1="0" x2="960" y2="900"/>
+    <line class="grid" x1="1000" y1="0" x2="1000" y2="900"/>
+    <line class="grid" x1="1040" y1="0" x2="1040" y2="900"/>
+    <line class="grid" x1="1080" y1="0" x2="1080" y2="900"/>
+    <line class="grid" x1="1120" y1="0" x2="1120" y2="900"/>
+    <line class="grid" x1="1160" y1="0" x2="1160" y2="900"/>
+
+    <line class="grid" x1="0" y1="0" x2="1200" y2="0"/>
+    <line class="grid" x1="0" y1="40" x2="1200" y2="40"/>
+    <line class="grid" x1="0" y1="80" x2="1200" y2="80"/>
+    <line class="grid" x1="0" y1="120" x2="1200" y2="120"/>
+    <line class="grid" x1="0" y1="160" x2="1200" y2="160"/>
+    <line class="grid" x1="0" y1="200" x2="1200" y2="200"/>
+    <line class="grid" x1="0" y1="240" x2="1200" y2="240"/>
+    <line class="grid" x1="0" y1="280" x2="1200" y2="280"/>
+    <line class="grid" x1="0" y1="320" x2="1200" y2="320"/>
+    <line class="grid" x1="0" y1="360" x2="1200" y2="360"/>
+    <line class="grid" x1="0" y1="400" x2="1200" y2="400"/>
+    <line class="grid" x1="0" y1="440" x2="1200" y2="440"/>
+    <line class="grid" x1="0" y1="480" x2="1200" y2="480"/>
+    <line class="grid" x1="0" y1="520" x2="1200" y2="520"/>
+    <line class="grid" x1="0" y1="560" x2="1200" y2="560"/>
+    <line class="grid" x1="0" y1="600" x2="1200" y2="600"/>
+    <line class="grid" x1="0" y1="640" x2="1200" y2="640"/>
+    <line class="grid" x1="0" y1="680" x2="1200" y2="680"/>
+    <line class="grid" x1="0" y1="720" x2="1200" y2="720"/>
+    <line class="grid" x1="0" y1="760" x2="1200" y2="760"/>
+    <line class="grid" x1="0" y1="800" x2="1200" y2="800"/>
+    <line class="grid" x1="0" y1="840" x2="1200" y2="840"/>
+    <line class="grid" x1="0" y1="880" x2="1200" y2="880"/>
+  </g>
+
+  <text class="text title" x="60" y="70">STM32F103 视觉云台简化接线图</text>
+
+  <rect class="box" x="70" y="170" width="200" height="520"/>
+  <text class="text title" x="130" y="445">MCU</text>
+  <text class="text small" x="90" y="735">STM32F103C8T6</text>
+
+  <rect class="box" x="660" y="120" width="340" height="140"/>
+  <text class="text title" x="790" y="200">K230</text>
+  <text class="text small" x="740" y="235">UART2_TX -&gt; MCU RX</text>
+
+  <rect class="box" x="520" y="670" width="170" height="130"/>
+  <text class="text title" x="545" y="748">X轴舵机</text>
+
+  <rect class="box" x="780" y="670" width="170" height="130"/>
+  <text class="text title" x="805" y="748">Y轴舵机</text>
+
+  <rect class="box" x="900" y="420" width="220" height="140"/>
+  <text class="text title" x="955" y="495">5V电源</text>
+  <text class="text small" x="945" y="530">舵机独立供电</text>
+
+  <path class="wire" d="M 830 260 L 830 360 L 275 360"/>
+  <text class="text label" x="470" y="335">PA10 / USART1_RX</text>
+
+  <path class="wire" d="M 865 670 L 865 500 L 275 500"/>
+  <text class="text label" x="280" y="485">PA7</text>
+  <text class="text small" x="360" y="485">TIM3_CH2 - Y轴</text>
+
+  <path class="wire" d="M 605 670 L 605 600 L 275 600"/>
+  <text class="text label" x="280" y="585">PA6</text>
+  <text class="text small" x="360" y="585">TIM3_CH1 - X轴</text>
+
+  <path class="wire" d="M 900 455 L 740 455 L 740 670"/>
+  <text class="text label" x="785" y="442">+5V</text>
+
+  <path class="wire" d="M 900 485 L 650 485 L 650 670"/>
+  <text class="text label" x="770" y="472">+5V</text>
+
+  <path class="wire" d="M 900 525 L 420 525 L 420 770 L 520 770"/>
+  <text class="text label" x="760" y="512">GND</text>
+
+  <path class="wire" d="M 900 545 L 450 545 L 450 790 L 780 790"/>
+  <text class="text label" x="760" y="572">GND</text>
+
+  <path class="wire" d="M 450 545 L 450 820 L 275 820"/>
+  <text class="text label" x="290" y="808">MCU GND</text>
+
+  <path class="wire" d="M 420 525 L 420 300 L 830 300 L 830 260"/>
+  <text class="text label" x="620" y="288">K230 GND 共地</text>
+
+  <text class="text small" x="610" y="855">注: 舵机电源请使用独立 5V，并与 MCU、K230 进行 GND 共地</text>
+</svg>

@@ -82,6 +82,7 @@ int main(void)
             float out_y;
 
             /* 原子读取中断更新的数据，防止读写竞争 */
+            //关开中断处理数据
             __disable_irq();
             offset_x = g_offset_x;
             offset_y = g_offset_y;

@@ -1,16 +1,32 @@
 {
     "configurations": [
         {
+            "name": "STM32F103",
+            "includePath": [
+                "${workspaceFolder}/../app",
+                "${workspaceFolder}/../driver",
+                "${workspaceFolder}/../firmware/cmsis/core",
+                "${workspaceFolder}/../firmware/cmsis/device",
+                "${workspaceFolder}/../firmware/driver/inc",
+                "${workspaceFolder}/.cmsis/include"
+            ],
+            "defines": [
+                "USE_STDPERIPH_DRIVER",
+                "STM32F10X_MD"
+            ],
+            "cStandard": "c99",
+            "intelliSenseMode": "gcc-arm"
+        },
+        {
             "name": "stm32f103",
             "includePath": [
-                "c:\\Users\\Lenovo\\Desktop\\stm_all\\project\\最终云台\\firmware\\cmsis\\core",
-                "c:\\Users\\Lenovo\\Desktop\\stm_all\\project\\最终云台\\firmware\\cmsis\\device",
-                "c:\\Users\\Lenovo\\Desktop\\stm_all\\project\\最终云台\\firmware\\driver\\inc",
-                "D:\\Keil_v5\\ARM\\ARMCC\\include",
-                "D:\\Keil_v5\\ARM\\ARMCC\\include\\rw",
-                "c:\\Users\\Lenovo\\Desktop\\stm_all\\project\\最终云台\\app",
-                "c:\\Users\\Lenovo\\Desktop\\stm_all\\project\\最终云台\\driver",
-                "c:\\Users\\Lenovo\\Desktop\\stm_all\\project\\最终云台\\firmware\\driver\\src"
+                "c:\\Users\\Lenovo\\Desktop\\stm_all\\project\\cloud_standard_mid\\firmware\\cmsis\\core",
+                "c:\\Users\\Lenovo\\Desktop\\stm_all\\project\\cloud_standard_mid\\firmware\\cmsis\\device",
+                "c:\\Users\\Lenovo\\Desktop\\stm_all\\project\\cloud_standard_mid\\firmware\\driver\\inc",
+                "C:\\Users\\Lenovo\\ARM\\ARMCC\\include",
+                "c:\\Users\\Lenovo\\Desktop\\stm_all\\project\\cloud_standard_mid\\app",
+                "c:\\Users\\Lenovo\\Desktop\\stm_all\\project\\cloud_standard_mid\\driver",
+                "c:\\Users\\Lenovo\\Desktop\\stm_all\\project\\cloud_standard_mid\\firmware\\driver\\src"
             ],
             "defines": [
                 "USE_STDPERIPH_DRIVER",
